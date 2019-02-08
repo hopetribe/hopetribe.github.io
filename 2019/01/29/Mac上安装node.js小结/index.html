@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-CN">
+<html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Android,iOS,移动客户端,Flutter,">
+  <meta name="keywords" content="Node.js,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="技术交流博客">
-<meta name="keywords" content="Android,iOS,移动客户端,Flutter">
+<meta name="description" content="本文指引在Mac OSX系统上正确安装Node Mac下彻底卸载node和npm安装前先彻底卸载已经安装的node.js  homebrew安装的 1brew uninstall node  官网pkg下载的 1sudo rm -rf /usr/local/&amp;#123;bin/&amp;#123;node,npm&amp;#125;,lib/node_modules/npm,lib/node,share/man/">
+<meta name="keywords" content="Node.js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="My Post">
-<meta property="og:url" content="blog.hopetribe.cn/2019/01/26/My-Post/index.html">
+<meta property="og:title" content="Mac上安装node.js小结">
+<meta property="og:url" content="blog.hopetribe.cn/2019/01/29/Mac上安装node.js小结/index.html">
 <meta property="og:site_name" content="宗哥的小栈">
-<meta property="og:description" content="技术交流博客">
+<meta property="og:description" content="本文指引在Mac OSX系统上正确安装Node Mac下彻底卸载node和npm安装前先彻底卸载已经安装的node.js  homebrew安装的 1brew uninstall node  官网pkg下载的 1sudo rm -rf /usr/local/&amp;#123;bin/&amp;#123;node,npm&amp;#125;,lib/node_modules/npm,lib/node,share/man/">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-26T09:37:25.000Z">
+<meta property="og:updated_time" content="2019-02-08T14:37:58.640Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="My Post">
-<meta name="twitter:description" content="技术交流博客">
+<meta name="twitter:title" content="Mac上安装node.js小结">
+<meta name="twitter:description" content="本文指引在Mac OSX系统上正确安装Node Mac下彻底卸载node和npm安装前先彻底卸载已经安装的node.js  homebrew安装的 1brew uninstall node  官网pkg下载的 1sudo rm -rf /usr/local/&amp;#123;bin/&amp;#123;node,npm&amp;#125;,lib/node_modules/npm,lib/node,share/man/">
 
 
 
@@ -98,7 +98,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="blog.hopetribe.cn/2019/01/26/My-Post/">
+  <link rel="canonical" href="blog.hopetribe.cn/2019/01/29/Mac上安装node.js小结/">
 
 
 
 
 
-  <title>My Post | 宗哥的小栈</title>
+  <title>Mac上安装node.js小结 | 宗哥的小栈</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="blog.hopetribe.cn/2019/01/26/My-Post/">
+    <link itemprop="mainEntityOfPage" href="blog.hopetribe.cn/2019/01/29/Mac上安装node.js小结/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eric Huang">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">My Post</h1>
+          <h1 class="post-title" itemprop="name headline">Mac上安装node.js小结</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-26T15:49:13+08:00">
-                2019-01-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-29T12:12:38+08:00">
+                2019-01-29
               </time>
             
 
@@ -326,8 +326,8 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
+                  <a href="/categories/技术/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
                   </a>
                 </span>
 
@@ -363,7 +363,47 @@
       
 
       
-        
+        <p>本文指引在Mac OSX系统上正确安装Node</p>
+<h2 id="Mac下彻底卸载node和npm"><a href="#Mac下彻底卸载node和npm" class="headerlink" title="Mac下彻底卸载node和npm"></a>Mac下彻底卸载node和npm</h2><p>安装前先彻底卸载已经安装的node.js</p>
+<ul>
+<li><p>homebrew安装的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew uninstall node</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>官网pkg下载的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -rf /usr/local/&#123;bin/&#123;node,npm&#125;,lib/node_modules/npm,lib/node,share/man/*/node.*&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="安装最新的Command-Line工具"><a href="#安装最新的Command-Line工具" class="headerlink" title="安装最新的Command Line工具"></a>安装最新的Command Line工具</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ xcode-select --install</span><br></pre></td></tr></table></figure>
+<h2 id="使用一下脚本安装nvm"><a href="#使用一下脚本安装nvm" class="headerlink" title="使用一下脚本安装nvm"></a>使用一下脚本安装nvm</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash</span><br></pre></td></tr></table></figure>
+<p>该脚本自动下载nvm至home目录下，成功后在home目录下新增.nvm目录（隐藏目录，ls -la命令可查看）</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
+<li><p>先用<strong>nvm list</strong>查看本地已经安装的node版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">nvm list</span><br><span class="line"></span><br><span class="line">-&gt;      v11.8.0</span><br><span class="line">default -&gt; v11.8.0</span><br><span class="line">node -&gt; stable (-&gt; v11.8.0) (default)</span><br><span class="line">stable -&gt; 11.8 (-&gt; v11.8.0) (default)</span><br><span class="line">iojs -&gt; N/A (default)</span><br><span class="line">lts/* -&gt; lts/dubnium (-&gt; N/A)</span><br><span class="line">lts/argon -&gt; v4.9.1 (-&gt; N/A)</span><br><span class="line">lts/boron -&gt; v6.16.0 (-&gt; N/A)</span><br><span class="line">lts/carbon -&gt; v8.15.0 (-&gt; N/A)</span><br><span class="line">lts/dubnium -&gt; v10.15.0 (-&gt; N/A)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用<strong>nvm ls-remote</strong>查看云端最新版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm ls-remote</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>从列表中选择自己要安装的版本，本文中选择最新的版本来安装；</p>
+<ol start="3">
+<li><p>安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm install v11.8.0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置该版本为默认版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm alias default v11.8.0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查版本号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新npm至最新版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g npm</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://yoember.com/nodejs/the-best-way-to-install-node-js/" target="_blank" rel="noopener">https://yoember.com/nodejs/the-best-way-to-install-node-js/</a></li>
+<li><a href="https://blog.csdn.net/shiquanqq/article/details/78032943" target="_blank" rel="noopener">https://blog.csdn.net/shiquanqq/article/details/78032943</a></li>
+</ol>
+
       
     </div>
     
@@ -375,7 +415,7 @@
     
       <div>
         <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>Donate comment here</div>
+  <div>支持原创，点赞打赏</div>
   <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
     <span>Donate</span>
   </button>
@@ -383,14 +423,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/wechat_pay.jpg" alt="Eric Huang WeChat Pay">
+        <img id="wechat_qr" src="/images/wechat_pay.png" alt="Eric Huang WeChat Pay">
         <p>WeChat Pay</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpg" alt="Eric Huang Alipay">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Eric Huang Alipay">
         <p>Alipay</p>
       </div>
     
@@ -409,13 +449,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag"># Android</a>
-          
-            <a href="/tags/iOS/" rel="tag"># iOS</a>
-          
-            <a href="/tags/移动客户端/" rel="tag"># 移动客户端</a>
-          
-            <a href="/tags/Flutter/" rel="tag"># Flutter</a>
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
           
         </div>
       
@@ -424,6 +458,22 @@
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/29/Github-hexo建站小结/" rel="prev" title="Github + hexo建站小结">
+                Github + hexo建站小结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -450,6 +500,9 @@
           
 
   
+    <div id="gitalk-container">
+    </div>
+  
 
 
 
@@ -472,8 +525,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -488,7 +550,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -499,7 +561,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -510,7 +572,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -533,6 +595,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac下彻底卸载node和npm"><span class="nav-number">1.</span> <span class="nav-text">Mac下彻底卸载node和npm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装最新的Command-Line工具"><span class="nav-number">2.</span> <span class="nav-text">安装最新的Command Line工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用一下脚本安装nvm"><span class="nav-number">3.</span> <span class="nav-text">使用一下脚本安装nvm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">4.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -565,7 +643,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
@@ -665,13 +743,6 @@
   
   
 
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
@@ -718,6 +789,22 @@
 
 
 
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '9264a4e7b839323b4d3d',
+          clientSecret: 'b0bda7064d53f42e16728152aaa45a825d3fd8cc',
+          repo: 'hopetribe.github.io',
+          owner: 'hopetribe',
+          admin: ['hopetribe'],
+          id: location.pathname,
+          distractionFreeMode: 'false'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+.gt-container a{border-bottom: none;}
   
 
 
