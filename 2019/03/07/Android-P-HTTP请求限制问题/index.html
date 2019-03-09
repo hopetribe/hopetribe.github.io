@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="博客,站点,">
+  <meta name="keywords" content="Android,">
 
 
 
@@ -79,21 +79,18 @@
 
 
 
-<meta name="description" content="本文简单对基于Github Pages和hexo搭建个人博客站点进行总结，欢迎提出意见和反馈。 安装node.js和Git 安装node.js参考Mac上安装node.js小结一文 安装Git1brew install git   安装hexo初始化博客本文假定博客存放目录名称为blog（下同）1hexo init blog 安装npm12cd blognpm install 检查是否成功12h">
-<meta name="keywords" content="博客,站点">
+<meta name="description" content="背景targetSdkVersion设置为28，运行在Andnroid 9.0设备上，原本http请求失败，如bugly上报失败；或者抛出以下错误：1java.net.UnknownServiceException: CLEARTEXT communication ** not permitted by network security policy 原因默认情况下启用网络传输层安全协议 (TLS">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Github + hexo建站小结">
-<meta property="og:url" content="blog.hopetribe.cn/2019/01/29/github+hexo/index.html">
+<meta property="og:title" content="Android P HTTP请求限制问题">
+<meta property="og:url" content="blog.hopetribe.cn/2019/03/07/Android-P-HTTP请求限制问题/index.html">
 <meta property="og:site_name" content="宗哥的小栈">
-<meta property="og:description" content="本文简单对基于Github Pages和hexo搭建个人博客站点进行总结，欢迎提出意见和反馈。 安装node.js和Git 安装node.js参考Mac上安装node.js小结一文 安装Git1brew install git   安装hexo初始化博客本文假定博客存放目录名称为blog（下同）1hexo init blog 安装npm12cd blognpm install 检查是否成功12h">
+<meta property="og:description" content="背景targetSdkVersion设置为28，运行在Andnroid 9.0设备上，原本http请求失败，如bugly上报失败；或者抛出以下错误：1java.net.UnknownServiceException: CLEARTEXT communication ** not permitted by network security policy 原因默认情况下启用网络传输层安全协议 (TLS">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://camo.githubusercontent.com/1f1940bfde096eddda51c3856fde79e2ba5068be/68747470733a2f2f692e6c6f6c692e6e65742f323031372f31302f30352f353964356337386634616161652e706e67">
-<meta property="og:image" content="https://camo.githubusercontent.com/bf5629a7167f6a0f931edd10a231e1520793e202/68747470733a2f2f6f6f6f2e306f302e6f6f6f2f323031372f31302f30362f353964366531306239636235662e706e67">
-<meta property="og:updated_time" content="2019-02-08T15:09:44.684Z">
+<meta property="og:updated_time" content="2019-03-09T02:12:12.101Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Github + hexo建站小结">
-<meta name="twitter:description" content="本文简单对基于Github Pages和hexo搭建个人博客站点进行总结，欢迎提出意见和反馈。 安装node.js和Git 安装node.js参考Mac上安装node.js小结一文 安装Git1brew install git   安装hexo初始化博客本文假定博客存放目录名称为blog（下同）1hexo init blog 安装npm12cd blognpm install 检查是否成功12h">
-<meta name="twitter:image" content="https://camo.githubusercontent.com/1f1940bfde096eddda51c3856fde79e2ba5068be/68747470733a2f2f692e6c6f6c692e6e65742f323031372f31302f30352f353964356337386634616161652e706e67">
+<meta name="twitter:title" content="Android P HTTP请求限制问题">
+<meta name="twitter:description" content="背景targetSdkVersion设置为28，运行在Andnroid 9.0设备上，原本http请求失败，如bugly上报失败；或者抛出以下错误：1java.net.UnknownServiceException: CLEARTEXT communication ** not permitted by network security policy 原因默认情况下启用网络传输层安全协议 (TLS">
 
 
 
@@ -123,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="blog.hopetribe.cn/2019/01/29/github+hexo/">
+  <link rel="canonical" href="blog.hopetribe.cn/2019/03/07/Android-P-HTTP请求限制问题/">
 
 
 
 
 
-  <title>Github + hexo建站小结 | 宗哥的小栈</title>
+  <title>Android P HTTP请求限制问题 | 宗哥的小栈</title>
   
 
 
@@ -266,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="blog.hopetribe.cn/2019/01/29/github+hexo/">
+    <link itemprop="mainEntityOfPage" href="blog.hopetribe.cn/2019/03/07/Android-P-HTTP请求限制问题/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eric Huang">
@@ -283,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Github + hexo建站小结</h1>
+          <h1 class="post-title" itemprop="name headline">Android P HTTP请求限制问题</h1>
         
 
         <div class="post-meta">
@@ -295,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-29T15:12:38+08:00">
-                2019-01-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-07T14:33:49+08:00">
+                2019-03-07
               </time>
             
 
@@ -320,6 +317,28 @@
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
                   <a href="/categories/技术/" itemprop="url" rel="index">
                     <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/客户端/" itemprop="url" rel="index">
+                    <span itemprop="name">客户端</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/客户端/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -355,38 +374,40 @@
       
 
       
-        <p>本文简单对基于Github Pages和hexo搭建个人博客站点进行总结，欢迎提出意见和反馈。</p>
-<h2 id="安装node-js和Git"><a href="#安装node-js和Git" class="headerlink" title="安装node.js和Git"></a>安装node.js和Git</h2><ul>
-<li>安装node.js<br>参考<a href="https://hopetribe.cn/2019/01/29/Mac%E4%B8%8A%E5%AE%89%E8%A3%85node.js%E5%B0%8F%E7%BB%93/" target="_blank" rel="noopener">Mac上安装node.js小结</a>一文</li>
-<li>安装Git<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install git</span><br></pre></td></tr></table></figure>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>targetSdkVersion设置为28，运行在Andnroid 9.0设备上，原本http请求失败，如bugly上报失败；<br>或者抛出以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.net.UnknownServiceException: CLEARTEXT communication ** not permitted by network security policy</span><br></pre></td></tr></table></figure></p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>默认情况下启用网络传输层安全协议 (TLS)<br>如果您的应用以 Android 9 或更高版本为目标平台，则默认情况下 isCleartextTrafficPermitted() 函数返回 false。 如果您的应用需要为特定域名启用明文，您必须在应用的网络安全性配置中针对这些域名将 cleartextTrafficPermitted 显式设置为 true。</p>
+<blockquote>
+<p>详情请移步了解<a href="https://developer.android.google.cn/about/versions/pie/android-9.0-changes-28#framework-security-changes" target="_blank" rel="noopener">https://developer.android.google.cn/about/versions/pie/android-9.0-changes-28#framework-security-changes</a></p>
+</blockquote>
+<p>总之一句话，以前你要“裸奔”，我管不着，现在必须穿上“衣服”了，否则不让出街；<br>如果确实要继续“裸奔”，请书面申请。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><ol>
+<li>将所有http请求改为https请求；</li>
+<li>targetSdkVersion改为27或以下；</li>
+<li>继续使用http非加密明文请求，方法如下</li>
+</ol>
+<h3 id="配置网络安全策略"><a href="#配置网络安全策略" class="headerlink" title="配置网络安全策略"></a>配置网络安全策略</h3><ul>
+<li><p>在res的xml目录下，新建一个xml文件(名称自定义,如：network-security-config.xml)，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;network-security-config&gt;</span><br><span class="line">    &lt;base-config cleartextTrafficPermitted=&quot;true&quot; /&gt;</span><br><span class="line">&lt;/network-security-config&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在manifest的Application标签中设置安全策略配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;application</span><br><span class="line">    ...</span><br><span class="line">    android:networkSecurityConfig=&quot;@xml/network_security_config&quot;</span><br><span class="line">    android:supportsRtl=&quot;true&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 兼容Android 9.0 --&gt;</span><br><span class="line">    &lt;!--&lt;uses-library--&gt;</span><br><span class="line">    &lt;!--android:name=&quot;org.apache.http.legacy&quot;--&gt;</span><br><span class="line">    &lt;!--android:required=&quot;true&quot; /&gt;--&gt;</span><br><span class="line">&lt;/application&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><h2 id="初始化博客"><a href="#初始化博客" class="headerlink" title="初始化博客"></a>初始化博客</h2><p>本文假定博客存放目录名称为blog（下同）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure></p>
-<p>安装npm<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></p>
-<p>检查是否成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure></p>
-<p>浏览器打开<a href="http://localhost:4000，看到以下页面" target="_blank" rel="noopener">http://localhost:4000，看到以下页面</a></p>
-<p><img src="https://camo.githubusercontent.com/1f1940bfde096eddda51c3856fde79e2ba5068be/68747470733a2f2f692e6c6f6c692e6e65742f323031372f31302f30352f353964356337386634616161652e706e67" alt="效果"></p>
-<h2 id="关联Github"><a href="#关联Github" class="headerlink" title="关联Github"></a>关联Github</h2><ol>
-<li>登录您的 GitHub 账号，新建名称为您的用户名.github.io的仓库。假设我的 GitHub 账号的用户名是 test，那么我就应该新建名称为test.github.io的仓库。</li>
-<li>Description可写可不写，随意。</li>
-<li>勾上Initialize this repository with a README。</li>
-<li>点击Create Repository完成创建。</li>
-</ol>
-<h2 id="开启Github-Pages"><a href="#开启Github-Pages" class="headerlink" title="开启Github Pages"></a>开启Github Pages</h2><p>点击Settings，你将会打开这个库的 Settings 页面，向下拖动，直到看见 GitHub Pages，如图：<br><img src="https://camo.githubusercontent.com/bf5629a7167f6a0f931edd10a231e1520793e202/68747470733a2f2f6f6f6f2e306f302e6f6f6f2f323031372f31302f30362f353964366531306239636235662e706e67" alt="Githug Pages Setting"></p>
-<h2 id="修改全局配置文件"><a href="#修改全局配置文件" class="headerlink" title="修改全局配置文件"></a>修改全局配置文件</h2><p>本地blog文件夹下_config.yml，打开后滑到最后，修改成下边的样子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/xxx/xxx.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
-<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-<h2 id="常见指令"><a href="#常见指令" class="headerlink" title="常见指令"></a>常见指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;postName&quot;        //新建文章</span><br><span class="line">hexo new page &quot;pageName&quot;        //新建页面</span><br><span class="line">hexo g          //生成静态页面至public目录</span><br><span class="line">hexo server         //开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）</span><br><span class="line">hexo deploy         //将.deploy目录部署到GitHub</span><br></pre></td></tr></table></figure>
-<h3 id="常用组合"><a href="#常用组合" class="headerlink" title="常用组合"></a>常用组合</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-<h2 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h2><p>终端cd到博客文件夹下，执行如下命令新建文章：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;xxx&quot;</span><br></pre></td></tr></table></figure></p>
-<p>名为xxx.md的文件会建在目录…/博客目录名/source/_posts下。</p>
-<p>所有的文章都会以md形式保存在_post文件夹中，只要在_post文件夹中新建md类型的文档，就能在执行hexo g的时候被渲染。新建的文章头需要添加一些信息，如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: xxx    //在此处添加你的标题。</span><br><span class="line">date: 2019-1-28 13:38:49   //在此处输入编辑这篇文章的时间。</span><br><span class="line">tags: xxx    //在此处输入这篇文章的标签。</span><br><span class="line">categories: xxx    //在此处输入这篇文章的分类。</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<p>文章编辑完成后，终端cd到博客文件夹下，依次执行如下命令来发布：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-<p>至此，Mac 上搭建基于 GitHub Pages + Hexo 的博客就完成了。</p>
+<h3 id="添加legacy库依赖"><a href="#添加legacy库依赖" class="headerlink" title="添加legacy库依赖"></a>添加legacy库依赖</h3><ul>
+<li><p>build.gradle添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useLibrary &apos;org.apache.http.legacy&apos;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>manifest中添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;application</span><br><span class="line">    ...</span><br><span class="line">    android:networkSecurityConfig=&quot;@xml/network_security_config&quot;</span><br><span class="line">    android:supportsRtl=&quot;true&quot;&gt;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    &lt;!-- 兼容Android 9.0 --&gt;</span><br><span class="line">    &lt;uses-library</span><br><span class="line">    android:name=&quot;org.apache.http.legacy&quot;</span><br><span class="line">    android:required=&quot;true&quot; /&gt;</span><br><span class="line">&lt;/application&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>以上，问题可解；</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>https是大势所趋，早晚得支持，长痛不如短痛。勇敢上吧！</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a href="https://github.com/HarleyWang93/blog/issues/1" target="_blank" rel="noopener">https://github.com/HarleyWang93/blog/issues/1</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/26625249" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26625249</a></li>
+<li><a href="https://blog.csdn.net/mysimplelove/article/details/84063571" target="_blank" rel="noopener">https://blog.csdn.net/mysimplelove/article/details/84063571</a></li>
+<li><a href="https://developer.android.google.cn/training/articles/security-config" target="_blank" rel="noopener">https://developer.android.google.cn/training/articles/security-config</a></li>
+<li><a href="https://developer.android.google.cn/training/articles/security-ssl" target="_blank" rel="noopener">https://developer.android.google.cn/training/articles/security-ssl</a></li>
+<li><a href="https://blog.csdn.net/baidu_26829785/article/details/82660740" target="_blank" rel="noopener">https://blog.csdn.net/baidu_26829785/article/details/82660740</a></li>
 </ol>
 
       
@@ -434,9 +455,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/博客/" rel="tag"># 博客</a>
-          
-            <a href="/tags/站点/" rel="tag"># 站点</a>
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
         </div>
       
@@ -449,8 +468,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/29/install node.js on Mac/" rel="next" title="Mac上安装node.js小结">
-                <i class="fa fa-chevron-left"></i> Mac上安装node.js小结
+              <a href="/2019/01/31/删除List元素异常/" rel="next" title="删除List元素异常">
+                <i class="fa fa-chevron-left"></i> 删除List元素异常
               </a>
             
           </div>
@@ -459,8 +478,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/31/exception when delete element from list/" rel="prev" title="删除List元素异常">
-                删除List元素异常 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/09/深究Java的VirtualMachineError/" rel="prev" title="(译)深究Java的VirtualMachineError">
+                (译)深究Java的VirtualMachineError <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -541,7 +560,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -552,7 +571,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -563,7 +582,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -596,7 +615,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装node-js和Git"><span class="nav-number">1.</span> <span class="nav-text">安装node.js和Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装hexo"><span class="nav-number">2.</span> <span class="nav-text">安装hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化博客"><span class="nav-number">3.</span> <span class="nav-text">初始化博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关联Github"><span class="nav-number">4.</span> <span class="nav-text">关联Github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启Github-Pages"><span class="nav-number">5.</span> <span class="nav-text">开启Github Pages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改全局配置文件"><span class="nav-number">6.</span> <span class="nav-text">修改全局配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布"><span class="nav-number">7.</span> <span class="nav-text">发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见指令"><span class="nav-number">8.</span> <span class="nav-text">常见指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用组合"><span class="nav-number">8.1.</span> <span class="nav-text">常用组合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布文章"><span class="nav-number">9.</span> <span class="nav-text">发布文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">10.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置网络安全策略"><span class="nav-number">3.1.</span> <span class="nav-text">配置网络安全策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加legacy库依赖"><span class="nav-number">3.2.</span> <span class="nav-text">添加legacy库依赖</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -787,7 +806,7 @@
           clientID: '9264a4e7b839323b4d3d',
           clientSecret: 'b0bda7064d53f42e16728152aaa45a825d3fd8cc',
           repo: 'hopetribe.github.io',
-          //owner: 'hopetribe',
+          //ff owner: 'hopetribe',
           owner: ['hopetribe', 'hopetribe@gmail.com'],
           //admin: ['hopetribe'],
           admin: ['hopetribe', 'hopetribe@gmail.com'],

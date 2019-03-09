@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="StackOverFlowError是常见的JVM错误之一。在这篇博文中，让我们学习线程堆栈的内部机制，可以触发StackOverFlowError的原因以及解决此错误的潜在解决方案。 为了更深入地了解StackOverFlowError，让我们回顾一下这个简单的程序：1234567891011121314151617181920public class SimpleExample &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（译）StackOverflowError产生原因和解决方案">
+<meta property="og:url" content="blog.hopetribe.cn/2019/03/09/StackOverflowError产生原因和解决方案/index.html">
+<meta property="og:site_name" content="宗哥的小栈">
+<meta property="og:description" content="StackOverFlowError是常见的JVM错误之一。在这篇博文中，让我们学习线程堆栈的内部机制，可以触发StackOverFlowError的原因以及解决此错误的潜在解决方案。 为了更深入地了解StackOverFlowError，让我们回顾一下这个简单的程序：1234567891011121314151617181920public class SimpleExample &amp;#123;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://fastthread.files.wordpress.com/2018/09/thread-stack-frame-1.png?w=1472">
+<meta property="og:image" content="https://fastthread.files.wordpress.com/2018/09/thread-stack-frame-2.png?w=1472">
+<meta property="og:image" content="https://fastthread.files.wordpress.com/2018/09/stackoverflowerror.png?w=1472">
+<meta property="og:updated_time" content="2019-03-09T02:20:06.449Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="（译）StackOverflowError产生原因和解决方案">
+<meta name="twitter:description" content="StackOverFlowError是常见的JVM错误之一。在这篇博文中，让我们学习线程堆栈的内部机制，可以触发StackOverFlowError的原因以及解决此错误的潜在解决方案。 为了更深入地了解StackOverFlowError，让我们回顾一下这个简单的程序：1234567891011121314151617181920public class SimpleExample &amp;#123;">
+<meta name="twitter:image" content="https://fastthread.files.wordpress.com/2018/09/thread-stack-frame-1.png?w=1472">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="blog.hopetribe.cn/2019/03/09/StackOverflowError产生原因和解决方案/">
+
+
+
+
+
+  <title>（译）StackOverflowError产生原因和解决方案 | 宗哥的小栈</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">宗哥的小栈</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">欢迎各路好汉进栈交流</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="blog.hopetribe.cn/2019/03/09/StackOverflowError产生原因和解决方案/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eric Huang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宗哥的小栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">（译）StackOverflowError产生原因和解决方案</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-09T10:16:12+08:00">
+                2019-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>StackOverFlowError是常见的JVM错误之一。在这篇博文中，让我们学习线程堆栈的内部机制，可以触发StackOverFlowError的原因以及解决此错误的潜在解决方案。</p>
+<p>为了更深入地了解StackOverFlowError，让我们回顾一下这个简单的程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class SimpleExample &#123;</span><br><span class="line">      public static void main(String args[]) &#123;</span><br><span class="line">            a()</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public static void a() &#123;</span><br><span class="line">            int x = 0;</span><br><span class="line">            b();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public static void b() &#123;</span><br><span class="line">            Car y = new Car();</span><br><span class="line">            c();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public static void c() &#123;</span><br><span class="line">            float z = 0f;</span><br><span class="line">            System.out.println(&quot;Hello&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用以下执行代码，此程序非常简单：</p>
+<ul>
+<li>首先调用main（）方法</li>
+<li>main（）方法调用a（）方法。在（）方法内部，整数变量’x’被初始化为值0。</li>
+<li>a（）方法又调用b（）方法。在b（）方法内部构造Car对象并将其赋值给变量’y’。</li>
+<li>b（）方法依次调用c（）方法。在c（）方法中，float变量’z’被初始化为值0。</li>
+</ul>
+<p>让我们看下执行上述简单程序时背后发生的事情。应用程序中的每个线程都有自己的堆栈。每个堆栈都有多个堆栈帧。Thread将执行的方法，原始数据类型，对象指针，返回值按其执行顺序排列到其堆栈帧。<br><img src="https://fastthread.files.wordpress.com/2018/09/thread-stack-frame-1.png?w=1472" alt="线程堆栈"></p>
+<p><strong>步骤＃1</strong> ： main（）方法被推入应用程序线程的堆栈中。</p>
+<p><strong>步骤＃2</strong>： a（）方法被推入应用程序线程的堆栈中。在（）方法中，原始数据类型“int”定义为值0并分配给变量x。此信息也被推送到同一堆栈帧中。注意两个数据，即’0’和变量’x’被推入线程的堆栈帧。</p>
+<p><strong>步骤＃3</strong>： b（）方法被推入线程的堆栈。在b（）方法中，创建’Car’对象并将其赋值给变量’y’。这里要注意的关键点是’Car’对象是在堆中创建的，而不是在线程的堆栈中创建的。只有Car对象的引用，即y存储在线程的堆栈帧中。</p>
+<p><strong>步骤＃4</strong>： c（）方法被推入线程的堆栈中。在c（）方法中，原始数据类型“float”定义为值0f并分配给变量z。此信息也被推送到相同的堆栈帧中。注意两个数据，即’0f’和变量’z’被推入线程的堆栈帧。</p>
+<p>一旦每个方法的执行完成，则删除存储在堆栈帧中的方法和变量/对象指针，如下图所示。</p>
+<p><img src="https://fastthread.files.wordpress.com/2018/09/thread-stack-frame-2.png?w=1472" alt=""></p>
+<h2 id="是什么导致了StackOverflowError"><a href="#是什么导致了StackOverflowError" class="headerlink" title="是什么导致了StackOverflowError"></a>是什么导致了StackOverflowError</h2><p>正如您所看到的，线程的堆栈正在存储正在执行的方法，原始数据类型，变量，对象指针和返回值。所有这些都消耗内存。如果线程的堆栈大小超出分配的内存限制，则抛出StackOverflowError。让我们看看下面的buggy程序，它将导致StackOverflowError：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SOFDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">a</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">// 导致出错的地方，导致a()方法无限次调用</span></span><br><span class="line">            a();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">            a();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这个程序中，main（）方法调用一个（）方法。a（）方法递归调用自身。此实现将导致无限次调用a（）方法。在这种情况下，a（）方法将无限次地添加到线程的堆栈帧中。因此，在几千次迭代之后，将超过线程的堆栈大小限制。一旦超过堆栈大小限制，它将导致’StackOverflowError’：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">"main"</span> java.lang.StackOverflowError</span><br><span class="line">    at com.buggyapp.stackoverflow.SOFDemo.a(SOFDemo.java:<span class="number">7</span>)</span><br><span class="line">    at com.buggyapp.stackoverflow.SOFDemo.a(SOFDemo.java:<span class="number">7</span>)</span><br><span class="line">    at com.buggyapp.stackoverflow.SOFDemo.a(SOFDemo.java:<span class="number">7</span>)</span><br><span class="line">    at com.buggyapp.stackoverflow.SOFDemo.a(SOFDemo.java:<span class="number">7</span>)</span><br><span class="line">    at com.buggyapp.stackoverflow.SOFDemo.a(SOFDemo.java:<span class="number">7</span>)</span><br><span class="line">    at com.buggyapp.stackoverflow.SOFDemo.a(SOFDemo.java:<span class="number">7</span>)</span><br><span class="line">    at com.buggyapp.stackoverflow.SOFDemo.a(SOFDemo.java:<span class="number">7</span>)</span><br><span class="line">    at com.buggyapp.stackoverflow.SOFDemo.a(SOFDemo.java:<span class="number">7</span>)</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://fastthread.files.wordpress.com/2018/09/stackoverflowerror.png?w=1472" alt=""></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>有几种策略可以解决StackOverflowError问题。</p>
+<h3 id="1-修复代码"><a href="#1-修复代码" class="headerlink" title="1. 修复代码"></a>1. 修复代码</h3><p>如上错误代码所示，由于非终止递归调用，线程堆栈大小可以增长到很大直到抛出异常。在这种情况下，必须修复导致递归循环的源码。当抛出’StackOverflowError’时，从堆栈可以看出递归执行的代码地方。在上面的例子中，它是’a（）’方法里递归调用了，移除递归调用或者添加停止递归的逻辑即可解决。</p>
+<h3 id="2-增加堆栈大小"><a href="#2-增加堆栈大小" class="headerlink" title="2. 增加堆栈大小"></a>2. 增加堆栈大小</h3><p>可能存在需要增加线程堆栈大小的合理原因。也许线程必须执行大量的方法或在方法线程中执行的许多局部变量/执行。在这种情况下，您可以使用JVM参数：’-Xss’来增加线程的堆栈大小。启动应用程序时需要传递此参数。例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Xss2m</span><br></pre></td></tr></table></figure></p>
+<p>这会将线程的堆栈大小设置为2 mb。</p>
+<p>它可能会带来一个问题，默认线程的堆栈大小是多少？默认线程堆栈大小因操作系统，Java版本和供应商而异。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">JVM版本</th>
+<th style="text-align:left">线程堆栈大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Sparc 32位JVM</td>
+<td style="text-align:left">512K</td>
+</tr>
+<tr>
+<td style="text-align:left">Sparc 64位JVM</td>
+<td style="text-align:left">1024K</td>
+</tr>
+<tr>
+<td style="text-align:left">x86 Solaris / Linux 32位JVM</td>
+<td style="text-align:left">320K</td>
+</tr>
+<tr>
+<td style="text-align:left">x86 Solaris / Linux 64位JVM</td>
+<td style="text-align:left">1024K</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 32位JVM</td>
+<td style="text-align:left">320K</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 64位JVM</td>
+<td style="text-align:left">1024K</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>支持原创，点赞打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat_pay.png" alt="Eric Huang WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Eric Huang Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/09/深究Java的VirtualMachineError/" rel="next" title="(译)深究Java的VirtualMachineError">
+                <i class="fa fa-chevron-left"></i> (译)深究Java的VirtualMachineError
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Eric Huang</p>
+              <p class="site-description motion-element" itemprop="description">技术交流博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#是什么导致了StackOverflowError"><span class="nav-number">1.</span> <span class="nav-text">是什么导致了StackOverflowError</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">2.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-修复代码"><span class="nav-number">2.1.</span> <span class="nav-text">1. 修复代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-增加堆栈大小"><span class="nav-number">2.2.</span> <span class="nav-text">2. 增加堆栈大小</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eric Huang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '9264a4e7b839323b4d3d',
+          clientSecret: 'b0bda7064d53f42e16728152aaa45a825d3fd8cc',
+          repo: 'hopetribe.github.io',
+          //ff owner: 'hopetribe',
+          owner: ['hopetribe', 'hopetribe@gmail.com'],
+          //admin: ['hopetribe'],
+          admin: ['hopetribe', 'hopetribe@gmail.com'],
+          id: location.pathname,
+          distractionFreeMode: 'false'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+.gt-container a{border-bottom: none;}
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
