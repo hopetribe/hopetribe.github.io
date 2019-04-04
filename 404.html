@@ -300,7 +300,7 @@
           
 
   
-    <div id="gitalk-container">
+    <div class="comments" id="comments">
     </div>
   
 
@@ -562,24 +562,29 @@
 
 
 
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'qPsahS1BIkUuWeRgWwWK2sfb-gzGzoHsz',
+        appKey: 'kUFhtGHmnD3l8p5DRfq13VcR',
+        placeholder: '请在这里输入您的留言',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-   <script type="text/javascript">
-        var gitalk = new Gitalk({
-          clientID: '9264a4e7b839323b4d3d',
-          clientSecret: 'b0bda7064d53f42e16728152aaa45a825d3fd8cc',
-          repo: 'hopetribe.github.io',
-          //ff owner: 'hopetribe',
-          owner: ['hopetribe', 'hopetribe@gmail.com'],
-          //admin: ['hopetribe'],
-          admin: ['hopetribe', 'hopetribe@gmail.com'],
-          id: location.pathname,
-          distractionFreeMode: 'false'
-        })
-        gitalk.render('gitalk-container')           
-       </script>
 
 .gt-container a{border-bottom: none;}
   
